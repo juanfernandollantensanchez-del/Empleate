@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Empléate - Vacantes</title>
+</head>
+<body>
+
+    <h1>Empléate</h1>
+    <h2>Ofertas de empleo</h2>
+
+    <a href="{% url 'crear_vacante' %}">
+        Publicar nueva vacante
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'buscar_vacantes' %}">
+        Buscar y filtrar vacantes
+    </a>
+
+    <hr>
+
+    {% if vacantes %}
+
+        {% for vacante in vacantes %}
+
+            <h3>{{ vacante.cargo }}</h3>
+
+            <p>
+                <strong>Empresa:</strong>
+                {{ vacante.empresa }}
+            </p>
+
+            <p>
+                <strong>Categoría:</strong>
+                {{ vacante.categoria }}
+            </p>
+
+            <p>
+                <strong>Salario:</strong>
+                ${{ vacante.salario }}
+            </p>
+
+            <p>
+                <strong>Descripción:</strong>
+                {{ vacante.descripcion }}
+            </p>
+
+            <p>
+                <strong>Publicada:</strong>
+                {{ vacante.fecha_publicacion }}
+            </p>
+
+            <a href="{% url 'editar_vacante' vacante.id %}">
+                Editar vacante
+            </a>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No hay vacantes publicadas.</p>
+
+    {% endif %}
+
+</body>
+</html>

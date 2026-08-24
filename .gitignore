@@ -1,5 +1,4 @@
 v_empleate/
-pr_empleate/
 db.sqlite3
 __pycache__/
 *.pyc
