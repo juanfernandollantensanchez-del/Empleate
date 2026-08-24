@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_empleate'
+    'app_hojaVida'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'pr_empleate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app_empleate/templates/app_empleate'],
+        'DIRS': ['app_hojaVida/templates/app_hojaVida'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
