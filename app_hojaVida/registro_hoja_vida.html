@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar hoja de vida</title>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Registrar hoja de vida</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label>Dirección:</label>
+            <input type="text" name="direccion">
+
+            <label>Educación:</label>
+            <textarea name="educacion"></textarea>
+
+            <label>Experiencia laboral:</label>
+            <textarea name="experiencia_laboral"></textarea>
+
+            <label>Idiomas:</label>
+            <input type="text" name="idiomas">
+
+            <label>Antecedentes penales:</label>
+            <textarea name="antecedentes_penales"></textarea>
+
+            <label>Habilidades:</label>
+            <textarea name="habilidades"></textarea>
+
+            <button type="submit">Registrar hoja de vida</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r-sr@gc&4)+^te2(&6is14k#&%dvv7=6=)2h-u=&_b(%9w2=i$'
+SECRET_KEY = 'django-insecure-!b_r^$af6^+!@xjtdf(7+vt@1awac%%zh9lcc4h5*rn2z!wl1x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_feedback',
-    'app_hojaVida',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +53,8 @@ ROOT_URLCONF = 'pr_empleate.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.DjangoTemplates',
-        'DIRS': ['app_hojaVida/templates/app_hojaVida'],
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +125,3 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = BASE_DIR / 'media'
