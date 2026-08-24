@@ -1,18 +1,17 @@
-"""
-URL configuration for pr_empleate project.
-"""
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
+    # Panel de administración de Django
     path('admin/', admin.site.urls),
-    path('api/feedback/', include('app_feedback.urls')),
-    path('empleate/', include('app_hojaVida.urls')),
-]
 
-urlpatterns += static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT
-)
+    # Autenticación, registro y página de inicio (raíz del sitio)
+    path('', include('app_usuario.urls')),
+
+    # Rutas relativas para los demás módulos
+    path('empresas/', include('empresas_app.urls')),
+    path('categorias/', include('categorias_app.urls')),
+    path('hoja-vida/', include('app_hojaVida.urls')),
+    path('postulaciones/', include('app_postulacion.urls')),
+    path('feedback/', include('app_feedback.urls')),
+]
