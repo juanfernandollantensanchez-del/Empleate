@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class OfertaEmpleo(models.Model):
     titulo = models.CharField(max_length=200)
@@ -12,7 +12,7 @@ class OfertaEmpleo(models.Model):
         return self.titulo
 
 class HojaVida(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nombre_completo = models.CharField(max_length=200)
     email = models.EmailField()
     telefono = models.CharField(max_length=20)
@@ -24,7 +24,7 @@ class HojaVida(models.Model):
         return f"Hoja de vida de {self.nombre_completo}"
 
 class Postulacion(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE)
     fecha_postulacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(
