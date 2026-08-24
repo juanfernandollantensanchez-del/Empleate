@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'app_postulacion',
     'app_usuario',
     'empresas_app',
+    'categorias_app',
     # Agrega aquí el nombre de la carpeta de categorías si le cambiaste el nombre
 ]
 
