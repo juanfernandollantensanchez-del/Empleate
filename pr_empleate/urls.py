@@ -14,4 +14,5 @@ urlpatterns = [
     path('crear-empleate/', include('app_hojaVida.urls')),
     path('postulaciones/', include('app_postulacion.urls')),
     path('feedback/', include('app_feedback.urls')),
+    path('vacantes/', include('app_vacantes.urls')),
 ]

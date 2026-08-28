@@ -9,9 +9,15 @@ env/
 # Archivos temporales y caché de Python
 __pycache__/
 *.pyc
+<<<<<<< HEAD
 *.pyo
 
 # Configuraciones del editor / SO
 .vscode/
 .idea/
 .DS_Store
+=======
+__pycache__/
+*.pyc
+v_empleate/
+>>>>>>> bbe0bcc (Subir proyecto completo)
