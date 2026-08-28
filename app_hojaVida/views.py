@@ -39,7 +39,7 @@ def crear_empleate(request):
         return HttpResponse("<h1>Hoja de vida registrada correctamente</h1><a href='/crear-empleate/'>Registrar otra</a>")
 
     # Renderiza la plantilla con el diseño CSS completo
-    return render(request, 'app_hojaVida/crear_hoja_vida.html')
+    return render(request, 'app_empleate/registro_hoja_vida.html')
 
 
 def fnEmpleateMultilinea(request):
