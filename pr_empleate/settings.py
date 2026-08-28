@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'app_usuario',
     'empresas_app',
     'categorias_app',
+    'app_empleate',
 ]
 
 MIDDLEWARE = [
