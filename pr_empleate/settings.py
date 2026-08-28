@@ -61,7 +61,7 @@ ROOT_URLCONF = 'pr_empleate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'app_hojaVida' / 'templates' / 'app_hojaVida'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
