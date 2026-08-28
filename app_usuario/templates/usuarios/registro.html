@@ -1,0 +1,17 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Registro - Empléate{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Registro de Nuevo Usuario</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Completar Registro</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">
+        ¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: var(--azul-oscuro);">Inicia sesión aquí</a>
+    </p>
+</div>
+{% endblock %}

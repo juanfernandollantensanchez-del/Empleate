@@ -1,0 +1,17 @@
+# Entorno virtual
+v_empleate/
+venv/
+env/
+
+# Base de datos local
+*.sqlite3
+
+# Archivos temporales y caché de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Configuraciones del editor / SO
+.vscode/
+.idea/
+.DS_Store

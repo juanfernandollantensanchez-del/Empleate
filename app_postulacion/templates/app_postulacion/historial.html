@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>📋 Mi Historial de Postulaciones</h1>
+<hr>
+
+{% if postulaciones %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Oferta</th>
+                    <th>Empresa</th>
+                    <th>Fecha de Postulación</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for postulacion in postulaciones %}
+                    <tr>
+                        <td><strong>{{ postulacion.oferta.titulo }}</strong></td>
+                        <td>{{ postulacion.oferta.empresa }}</td>
+                        <td>{{ postulacion.fecha_postulacion|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            <!-- Diferentes estados con colores -->
+                            {% if postulacion.estado == 'ACEPTADO' %}
+                                <span class="badge bg-success">✅ Aceptado</span>
+                            {% elif postulacion.estado == 'RECHAZADO' %}
+                                <span class="badge bg-danger">❌ Rechazado</span>
+                            {% elif postulacion.estado == 'REVISADO' %}
+                                <span class="badge bg-warning text-dark">👀 En Revisión</span>
+                            {% else %}
+                                <span class="badge bg-secondary">⏳ Pendiente</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Contador de postulaciones -->
+    <div class="alert alert-info">
+        📊 Total de postulaciones: <strong>{{ postulaciones|length }}</strong>
+    </div>
+    
+{% else %}
+    <div class="alert alert-warning">
+        ⚠️ No tienes postulaciones registradas.
+        <br>
+        <a href="{% url 'listar_ofertas' %}" class="btn btn-primary mt-2">
+            🔍 Ver ofertas disponibles
+        </a>
+    </div>
+{% endif %}
+{% endblock %}
