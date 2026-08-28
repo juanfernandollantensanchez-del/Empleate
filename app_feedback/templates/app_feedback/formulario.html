@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Diagnóstico y Feedback</title>
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body { background-color: #f8fafc; font-family: 'Segoe UI', system-ui, sans-serif; }
+        .card { border: none; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card p-5 bg-white">
+                    <h2 class="text-center fw-bold text-dark mb-2">Módulo de Diagnóstico y Feedback</h2>
+                    <p class="text-center text-muted mb-4">Registro oficial de retroalimentación, test inicial y recomendaciones de entrenamiento.</p>
+                    <hr class="mb-4">
+                    
+                    {% load crispy_forms_tags %}
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
