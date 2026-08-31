@@ -1,0 +1,29 @@
+{% extends 'app_postulacion/base.html' %}
+
+{% block content %}
+<h2>Historial de Mis Postulaciones</h2>
+<p style="color: #666;">Aquí se reflejan todas tus postulaciones activas registradas en el sistema.</p>
+
+{% if postulaciones %}
+    <table>
+        <thead>
+            <tr>
+                <th>Oferta Aplicada</th>
+                <th>Descripción del Puesto</th>
+                <th>Fecha y Hora de Postulación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for postulacion in postulaciones %}
+            <tr>
+                <td><strong>{{ postulacion.oferta.titulo }}</strong></td>
+                <td>{{ postulacion.oferta.descripcion }}</td>
+                <td>{{ postulacion.fecha_postulacion|date:"d/m/Y H:i:s" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="text-align: center; color: #888; padding: 20px;">Aún no te has postulado a ninguna oferta de empleo.</p>
+{% endif %}
+{% endblock %}
