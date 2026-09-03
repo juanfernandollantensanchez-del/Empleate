@@ -1,17 +1,35 @@
+
+"""
+URL configuration for pr_empleate project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/6.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # Panel de administración de Django
     path('admin/', admin.site.urls),
 
-    # Autenticación, registro y página de inicio (raíz del sitio)
-    path('', include('app_usuario.urls')),
-
-    # Rutas relativas para los demás módulos
+    path('', include('app_usuario.urls')),  # Carga la app de usuario desde la raíz
+    path('vacantes/', include('app_empleate.urls')),
     path('empresas/', include('empresas_app.urls')),
     path('categorias/', include('categorias_app.urls')),
     path('empleate/', include('app_hojaVida.urls')),
     path('postulaciones/', include('app_postulacion.urls')),
     path('feedback/', include('app_feedback.urls')),
 ]
+
+path('postulaciones/', include('app_postulacion.urls')),
+
