@@ -7,7 +7,7 @@ urlpatterns = [
     path('vacantes/', include('app_empleate.urls')),
     path('empresas/', include('empresas_app.urls')),
     path('categorias/', include('categorias_app.urls')),
-    path('crear-empleate/', include('app_hojaVida.urls')),
+    path('empleate/', include('app_hojaVida.urls')),
     path('postulaciones/', include('app_postulacion.urls')),
     path('feedback/', include('app_feedback.urls')),
 ]
