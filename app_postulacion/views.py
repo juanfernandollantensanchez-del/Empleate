@@ -1,37 +1,49 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import OfertaEmpleo, Postulacion
+from django.contrib.auth.models import User
+from .models import Oferta, Postulacion, HojaDeVida
+
+def home(request):
+    return render(request, 'app_postulacion/index.html')
 
 def lista_ofertas(request):
-    """Muestra todas las ofertas activas."""
-    ofertas = OfertaEmpleo.objects.filter(activa=True).order_by('-fecha_publicacion')
-    return render(request, 'postulacion/lista_ofertas.html', {'ofertas': ofertas})
+    ofertas = Oferta.objects.all().order_by('-fecha_publicacion')
+    return render(request, 'app_postulacion/lista_ofertas.html', {'ofertas': ofertas})
 
-def detalle_oferta(request, oferta_id):
-    """Muestra el detalle de una oferta específica."""
-    oferta = get_object_or_404(OfertaEmpleo, id=oferta_id)
-    return render(request, 'postulacion/detalle_oferta.html', {'oferta': oferta})
-
-@login_required
-def mis_postulaciones(request):
-    """Muestra las postulaciones del usuario que ha iniciado sesión."""
-    postulaciones = Postulacion.objects.filter(usuario=request.user).order_by('-fecha_postulacion')
-    return render(request, 'postulacion/mis_postulaciones.html', {'postulaciones': postulaciones})
-
-@login_required
-def postularse(request, oferta_id):
-    """Crea una nueva postulación para el usuario autenticado."""
-    oferta = get_object_or_404(OfertaEmpleo, id=oferta_id)
+def postular_oferta(request, oferta_id):
+    oferta = get_object_or_404(Oferta, id=oferta_id)
     
-    # Validar que el usuario no se haya postulado ya
-    postulacion_existente = Postulacion.objects.filter(usuario=request.user, oferta=oferta).exists()
-    
-    if postulacion_existente:
-        messages.warning(request, 'Ya te has postulado a esta oferta anteriormente.')
+    # Si el usuario no ha iniciado sesión, se toma el usuario de prueba o el primero registrado
+    if request.user.is_authenticated:
+        usuario = request.user
     else:
-        # Crear la postulación
-        Postulacion.objects.create(usuario=request.user, oferta=oferta)
-        messages.success(request, f'Te has postulado exitosamente a: {oferta.titulo}')
+        usuario = User.objects.first()
+        if not usuario:
+            messages.error(request, "No existe un usuario registrado en el sistema.")
+            return redirect('lista_ofertas')
+
+    # Validar si el usuario tiene Hoja de Vida
+    if not hasattr(usuario, 'hoja_de_vida'):
+        messages.error(request, "El sistema no permite la postulación si el usuario no tiene hoja de vida registrada.")
+        return redirect('historial_postulaciones')
+
+    postulacion, created = Postulacion.objects.get_or_create(
+        usuario=usuario,
+        oferta=oferta
+    )
+    
+    if created:
+        messages.success(request, f"¡Postulación exitosa a '{oferta.titulo}'!")
+    else:
+        messages.info(request, "Ya te habías postulado previamente a esta oferta.")
         
-    return redirect('mis_postulaciones')
+    return redirect('historial_postulaciones')
+
+def historial_postulaciones(request):
+    # Si no hay sesión iniciada, muestra todas las postulaciones del sistema para pruebas
+    if request.user.is_authenticated:
+        postulaciones = Postulacion.objects.filter(usuario=request.user).order_by('-fecha_postulacion')
+    else:
+        postulaciones = Postulacion.objects.all().order_by('-fecha_postulacion')
+
+    return render(request, 'app_postulacion/historial.html', {'postulaciones': postulaciones})

@@ -1,0 +1,33 @@
+{% extends 'app_postulacion/base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 20px 0;">
+    <h2>Bienvenido a la Plataforma de Empleate</h2>
+    <p style="color: #666; font-size: 16px;">Selecciona una de las opciones para navegar por el sistema:</p>
+
+    <div style="display: flex; justify-content: center; gap: 25px; margin-top: 30px; flex-wrap: wrap;">
+        
+        <!-- Tarjeta 1: Ver Ofertas -->
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; width: 260px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background: #fff; text-align: center;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">Ofertas de Empleo</h3>
+            <p style="color: #555; font-size: 14px; min-height: 50px;">Explora las ofertas disponibles y postúlate directamente.</p>
+            <a href="{% url 'lista_ofertas' %}" class="btn">Ver Ofertas</a>
+        </div>
+
+        <!-- Tarjeta 2: Mis Postulaciones -->
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; width: 260px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background: #fff; text-align: center;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">Mis Postulaciones</h3>
+            <p style="color: #555; font-size: 14px; min-height: 50px;">Consulta el historial con fecha y hora de tus postulaciones.</p>
+            <a href="{% url 'historial_postulaciones' %}" class="btn">Ver Mi Historial</a>
+        </div>
+
+        <!-- Tarjeta 3: Administrador -->
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; width: 260px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background: #fff; text-align: center;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">Módulo Admin</h3>
+            <p style="color: #555; font-size: 14px; min-height: 50px;">Gestiona usuarios, hojas de vida y nuevas ofertas laborales.</p>
+            <a href="/admin/" target="_blank" class="btn btn-admin">Ir al Admin</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

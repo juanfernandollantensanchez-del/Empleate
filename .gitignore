@@ -1,23 +1,22 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
 # Entorno virtual
-v_empleate/
-venv/
+v_postulacion/
 env/
+venv/
+ENV/
 
 # Base de datos local
 *.sqlite3
+db.sqlite3
 
-# Archivos temporales y caché de Python
+# Archivos de caché de Python
 __pycache__/
-*.pyc
-<<<<<<< HEAD
-*.pyo
+*.py[cod]
 
-# Configuraciones del editor / SO
+# Archivos de entorno y configuración sensible
+.env
+
+# Archivos de configuración del editor / sistema
 .vscode/
 .idea/
 .DS_Store
-=======
-__pycache__/
-*.pyc
-v_empleate/
->>>>>>> bbe0bcc (Subir proyecto completo)
