@@ -11,22 +11,21 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
+# Application definition - app_usuario va primero para evitar errores de autenticación
 INSTALLED_APPS = [
+    'app_usuario',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_usuario',
     'empresas_app',
     'categorias_app',
     'app_hojaVida',
     'app_empleate',
     'app_feedback',
-    'app_postulacion'
-    
+    'app_postulacion',
 ]
 
 MIDDLEWARE = [
@@ -44,7 +43,7 @@ ROOT_URLCONF = 'pr_usuario.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'pr_usuario' / 'templates'], # <-- Se configuró la carpeta de templates global
+        'DIRS': [BASE_DIR / 'pr_usuario' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,23 +82,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'es-es'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'es-co'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
-# Email
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+# Email configuration (Estándar de Django)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Modelo de usuario personalizado
 AUTH_USER_MODEL = 'app_usuario.Usuario'

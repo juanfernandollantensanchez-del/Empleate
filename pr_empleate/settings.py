@@ -15,10 +15,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
+    # Esencial: app_usuario debe ir antes de las de administración y auth de Django
+    'app_usuario',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,11 +30,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
 
-    # Tus aplicaciones
+    # Tus demás aplicaciones
     'app_feedback',
     'app_hojaVida',
     'app_postulacion',
-    'app_usuario',
     'empresas_app',
     'categorias_app',
     'app_empleate',
@@ -73,9 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pr_empleate.wsgi.application'
 
-
 # Database
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,9 +80,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -101,30 +96,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-
 LANGUAGE_CODE = 'es-co'
-
 TIME_ZONE = 'America/Bogota'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files
-
 STATIC_URL = 'static/'
 
-
-# Email
-
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+# Email (Configuración estándar corregida)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Media Files & Custom User Model
 MEDIA_URL = '/media/'
