@@ -1,152 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar hoja de vida</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #eef4f8;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .contenedor {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            overflow: hidden;
-        }
-
-        .encabezado {
-            background: linear-gradient(135deg, #0066cc, #00a8e8);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .encabezado h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .encabezado p {
-            font-size: 15px;
-            opacity: 0.9;
-        }
-
-        .formulario {
-            padding: 35px;
-        }
-
-        .fila {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 22px;
-        }
-
-        .campo {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .campo label {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .campo input,
-        .campo textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd6df;
-            border-radius: 9px;
-            font-size: 15px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .campo input:focus,
-        .campo textarea:focus {
-            border-color: #008fe5;
-            box-shadow: 0 0 0 3px rgba(0,143,229,0.12);
-        }
-
-        .campo textarea {
-            min-height: 110px;
-            resize: vertical;
-        }
-
-        .campo input[type="file"] {
-            background: #f8fafc;
-            cursor: pointer;
-        }
-
-        .info-pdf {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .boton {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #004c99;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 700px) {
-
-            .fila {
-                grid-template-columns: 1fr;
-                gap: 18px;
-            }
-
-            .formulario {
-                padding: 25px 20px;
-            }
-
-            .encabezado h1 {
-                font-size: 24px;
-            }
-
-        }
-
-    </style>
-
 </head>
 
 <body>
@@ -164,13 +23,41 @@
 
         </div>
 
-
         <form class="formulario"
               method="POST"
               enctype="multipart/form-data">
 
             {% csrf_token %}
 
+            <!-- NOMBRE E IDENTIFICACIÓN -->
+
+            <div class="fila">
+
+                <div class="campo">
+
+                    <label>👤 Nombre completo</label>
+
+                    <input
+                        type="text"
+                        name="nombre_completo"
+                        placeholder="Ingresa tu nombre completo"
+                        required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>🪪 Número de identificación</label>
+
+                    <input
+                        type="text"
+                        name="identificacion"
+                        placeholder="Ingresa tu número de identificación"
+                        required>
+
+                </div>
+
+            </div>
 
             <div class="fila">
 
@@ -186,7 +73,6 @@
 
                 </div>
 
-
                 <div class="campo">
 
                     <label>🎓 Educación</label>
@@ -199,7 +85,6 @@
                 </div>
 
             </div>
-
 
             <div class="fila">
 
@@ -219,7 +104,6 @@
 
                 </div>
 
-
                 <div class="campo">
 
                     <label>💼 Experiencia laboral</label>
@@ -232,7 +116,6 @@
                 </div>
 
             </div>
-
 
             <div class="fila">
 
@@ -252,7 +135,6 @@
 
                 </div>
 
-
                 <div class="campo">
 
                     <label>🌎 Idiomas</label>
@@ -267,7 +149,6 @@
 
             </div>
 
-
             <div class="fila">
 
                 <div class="campo">
@@ -281,7 +162,6 @@
 
                 </div>
 
-
                 <div class="campo">
 
                     <label>⭐ Habilidades</label>
@@ -294,7 +174,6 @@
                 </div>
 
             </div>
-
 
             <div class="boton">
 

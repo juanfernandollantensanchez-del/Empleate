@@ -6,16 +6,11 @@ from . import views
 urlpatterns = [
 
     path(
-        'crear-empleate/',
+        '',
         views.crear_empleate
     ),
 
-    path(
-        '',
-        lambda request: HttpResponse(
-            "<h1>Bienvenido a mi aplicación EMPLEATE</h1>"
-        )
-    ),
+  
 
     path(
         'fnEmpleate-Multilinea/',

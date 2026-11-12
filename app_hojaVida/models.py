@@ -1,7 +1,12 @@
+
 from django.db import models
 
 
 class HojaVida(models.Model):
+
+    nombre_completo = models.CharField(max_length=200, default='')
+
+    identificacion = models.CharField(max_length=30, default='')
 
     direccion = models.CharField(max_length=200)
 
@@ -38,4 +43,4 @@ class HojaVida(models.Model):
     )
 
     def __str__(self):
-        return self.direccion
+        return self.nombre_completo

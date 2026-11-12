@@ -13,7 +13,7 @@ urlpatterns = [
     ),
 
     path(
-        'empleate/',
+        '',
         include('app_hojaVida.urls')  # <-- Cambiado de 'app_empleate.urls' a 'app_hojaVida.urls'
     ),
 
