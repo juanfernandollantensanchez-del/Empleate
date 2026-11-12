@@ -1,0 +1,67 @@
+/* ==========================================
+   PALETA ESTRICTA DE 3 COLORES (EMPLÉATE)
+========================================== */
+
+/* 1. Fondo general Blanco (Sobrescribe grises de Unfold) */
+body, main, .bg-gray-50, .bg-gray-100, .bg-white, table, .block {
+    background-color: #FFFFFF !important;
+}
+
+/* 2. Menú lateral, cabeceras y barras en Azul Pastel */
+aside, header, thead, thead tr, .bg-gray-900, .bg-gray-800, #nav {
+    background-color: #E0F2FE !important;
+}
+
+/* Bordes en azul pastel intermedio */
+*, border, hr {
+    border-color: #BAE6FD !important;
+}
+
+/* 3. Textos, títulos e iconos en Azul Intenso */
+body, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, label, th, td, div {
+    color: #0369A1 !important;
+}
+
+/* Corregir placeholders para que sean un azul más claro */
+::placeholder {
+    color: #7DD3FC !important;
+}
+
+/* 4. Botones principales (Fondo azul intenso, texto blanco) */
+button, input[type="submit"], input[type="button"], .bg-primary-600, .bg-primary-500 {
+    background-color: #0369A1 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+/* Mantener el texto blanco dentro de los botones */
+button *, input[type="submit"] *, .bg-primary-600 * {
+    color: #FFFFFF !important;
+}
+
+/* Efecto hover en botones (Un azul derivado apenas más claro) */
+button:hover, input[type="submit"]:hover {
+    background-color: #0284C7 !important;
+}
+
+/* 5. Efectos Hover en menús y filas de tablas (Azul pastel) */
+tr:hover td, tr:hover td div, aside a:hover, aside a:hover span {
+    background-color: #BAE6FD !important;
+    color: #0369A1 !important;
+}
+
+/* 6. Ocultar el selector de Tema Claro/Oscuro para no romper la paleta */
+button[aria-label="Theme"], 
+button[title="Tema"], 
+#theme-toggle {
+    display: none !important;
+}
+
+/* 7. Ajuste de logotipos e iconos del menú para que adopten el color azul intenso */
+svg {
+    stroke: #0369A1 !important;
+}
+button svg {
+    stroke: #FFFFFF !important; /* Iconos dentro de botones van en blanco */
+}
