@@ -58,7 +58,10 @@ ROOT_URLCONF = 'pr_empleate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'pr_usuario' / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,6 +108,12 @@ USE_TZ = True
 # Static files
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'pr_usuario' / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Email (Configuración estándar corregida)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -113,3 +122,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'app_usuario.Usuario'
+
+# Redirecciones del sistema de autenticación
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'

@@ -1,19 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Categoría</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f2f6f9; padding: 2rem; display: flex; justify-content: center; }
-        .form-container { background: white; padding: 2rem; border-radius: 12px; width: 100%; max-width: 450px; }
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; font-weight: bold; margin-bottom: 0.4rem; }
-        input[type="text"], select, textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        .btn-submit { width: 100%; background: #7097c0; color: white; border: none; padding: 0.7rem; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <div class="form-container">
+<body class="categoria-form-page">
+    <div class="form-container categoria-box">
         <h2>Nueva Categoría</h2>
         <form method="POST">
             {% csrf_token %}
@@ -21,7 +16,7 @@
             <div class="form-group"><label>Tipo:</label>{{ form.tipo_categoria }}</div>
             <div class="form-group"><label>Descripción:</label>{{ form.descripcion }}</div>
             <div class="form-group"><label>{{ form.estado }} Activa</label></div>
-            <button type="submit" class="btn-submit">Guardar Categoría</button>
+            <button type="submit" class="btn btn-primary btn-submit">Guardar Categoría</button>
         </form>
     </div>
 </body>

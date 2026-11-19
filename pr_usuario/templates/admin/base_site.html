@@ -1,0 +1,190 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Administración Empleate{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>
+    // Fuerza el modo claro en el almacenamiento del navegador para bloquear el tema oscuro de Django
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+</script>
+<style>
+    /* ==========================================================================
+       PALETA ESTRICTA: BLANCO, AZUL PASTEL Y AZUL CIELO (SIN MODO OSCURO)
+       ========================================================================== */
+    :root,
+    html,
+    html[data-theme="dark"],
+    html[data-theme="light"],
+    html[data-theme="auto"] {
+        color-scheme: light !important;
+
+        --primary: #2B8CE0 !important;
+        --secondary: #144B7D !important;
+        --accent: #CFE8FA !important;
+        --primary-fg: #FFFFFF !important;
+
+        --body-fg: #144B7D !important;
+        --body-bg: #EBF5FC !important;
+        --body-quiet-color: #356794 !important;
+        --body-loud-color: #144B7D !important;
+
+        --header-color: #FFFFFF !important;
+        --header-branding-color: #FFFFFF !important;
+        --header-bg: #144B7D !important;
+        --header-link-color: #FFFFFF !important;
+
+        --breadcrumbs-fg: #144B7D !important;
+        --breadcrumbs-link-fg: #2B8CE0 !important;
+        --breadcrumbs-bg: #CFE8FA !important;
+
+        --link-fg: #2B8CE0 !important;
+        --link-hover-color: #144B7D !important;
+        --link-selected-fg: #1D72BD !important;
+
+        --hairline-color: #B9DDF5 !important;
+        --border-color: #8CC6EF !important;
+
+        --darkened-bg: #EBF5FC !important;
+        --selected-bg: #CFE8FA !important;
+        --selected-row: #CFE8FA !important;
+
+        --button-fg: #FFFFFF !important;
+        --button-bg: #2B8CE0 !important;
+        --button-hover-bg: #144B7D !important;
+        --default-button-bg: #144B7D !important;
+        --default-button-hover-bg: #2B8CE0 !important;
+        --close-button-bg: #5BB0F2 !important;
+        --close-button-hover-bg: #2B8CE0 !important;
+        --delete-button-bg: #356794 !important;
+        --delete-button-hover-bg: #144B7D !important;
+
+        --object-tools-fg: #FFFFFF !important;
+        --object-tools-bg: #2B8CE0 !important;
+        --object-tools-hover-bg: #144B7D !important;
+    }
+
+    /* Fondo general Azul Pastel */
+    html, body {
+        background: linear-gradient(135deg, #CFE8FA 0%, #EBF5FC 55%, #CFE8FA 100%) !important;
+        color: #144B7D !important;
+    }
+
+    #container, #main, #content, .content {
+        background: transparent !important;
+        color: #144B7D !important;
+    }
+
+    /* Barra superior Azul Cielo con degradado */
+    #header {
+        background: linear-gradient(90deg, #144B7D 0%, #2B8CE0 65%, #5BB0F2 100%) !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 4px 12px rgba(20, 75, 125, 0.25) !important;
+    }
+
+    #branding h1, #site-name a {
+        color: #FFFFFF !important;
+        font-weight: 800 !important;
+    }
+
+    #user-tools, #user-tools a {
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+    }
+
+    /* Ocultar el botón de tema oscuro */
+    .theme-toggle {
+        display: none !important;
+    }
+
+    /* Tarjetas de cada App (Blanco + borde Azul Pastel + encabezado Azul Cielo) */
+    .module {
+        background-color: #FFFFFF !important;
+        border: 2px solid #8CC6EF !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        box-shadow: 0 6px 16px rgba(43, 140, 224, 0.14) !important;
+        margin-bottom: 22px !important;
+    }
+
+    .module h2, .module caption, .inline-group h2 {
+        background: linear-gradient(90deg, #144B7D 0%, #2B8CE0 100%) !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        padding: 10px 14px !important;
+    }
+
+    .module table th, .module table td {
+        background-color: #FFFFFF !important;
+        color: #144B7D !important;
+        border-bottom: 1px solid #CFE8FA !important;
+    }
+
+    .module table tr:nth-child(even) th,
+    .module table tr:nth-child(even) td {
+        background-color: #F4FAFF !important;
+    }
+
+    .module table tr:hover th,
+    .module table tr:hover td {
+        background-color: #CFE8FA !important;
+    }
+
+    .module a {
+        color: #2B8CE0 !important;
+        font-weight: 700 !important;
+    }
+
+    .module a:hover {
+        color: #144B7D !important;
+    }
+
+    /* Panel derecho (Acciones recientes) */
+    #content-related {
+        background-color: #FFFFFF !important;
+        border: 2px solid #8CC6EF !important;
+        border-top: 5px solid #2B8CE0 !important;
+        border-radius: 10px !important;
+        padding: 14px !important;
+    }
+
+    #content-related h2, #content-related h3 {
+        color: #144B7D !important;
+        border-bottom: 2px solid #CFE8FA !important;
+        padding-bottom: 6px !important;
+    }
+
+    /* Pantalla de Login del Admin */
+    body.login #container {
+        background-color: #FFFFFF !important;
+        border: 2px solid #8CC6EF !important;
+        border-top: 6px solid #2B8CE0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 25px rgba(43, 140, 224, 0.2) !important;
+    }
+
+    /* Inputs y Botones */
+    input[type="text"], input[type="password"], input[type="email"], select, textarea {
+        background-color: #FFFFFF !important;
+        color: #144B7D !important;
+        border: 2px solid #8CC6EF !important;
+        border-radius: 7px !important;
+    }
+
+    .button, input[type="submit"], input[type="button"], .submit-row input, a.button {
+        background: linear-gradient(135deg, #2B8CE0 0%, #5BB0F2 100%) !important;
+        color: #FFFFFF !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        border: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">Administración de Empleate</a>
+</div>
+{% endblock %}

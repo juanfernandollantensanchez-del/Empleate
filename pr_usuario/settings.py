@@ -91,6 +91,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'pr_usuario' / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files (Uploaded files)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Email configuration (Estándar de Django)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

@@ -1,6 +1,6 @@
 {% extends 'usuarios/base.html' %}
 
-{% block title %}Registro - Empléate{% endblock %}
+{% block title %}Registro - Empleate{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -10,8 +10,8 @@
         {{ form.as_p }}
         <button type="submit" class="btn">Completar Registro</button>
     </form>
-    <p style="text-align: center; margin-top: 15px;">
-        ¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: var(--azul-oscuro);">Inicia sesión aquí</a>
+    <p class="auth-footer-link">
+        ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>
     </p>
 </div>
 {% endblock %}
