@@ -1,4 +1,4 @@
-name: Django CI
+name: Django CI/CD
 
 on:
   push:
@@ -25,8 +25,14 @@ jobs:
 
     - name: Verificar proyecto Django
       run: |
-        python manage.py checkStart Command
-        Render runs this command to start your app with each deploy.
-        $
-        gunicorn your_application.wsgi
-        Required
+        python manage.py check
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Activar despliegue en Render
+      run: |
+        curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
