@@ -25,4 +25,8 @@ jobs:
 
     - name: Verificar proyecto Django
       run: |
-        python manage.py check
+        python manage.py checkStart Command
+        Render runs this command to start your app with each deploy.
+        $
+        gunicorn your_application.wsgi
+        Required
