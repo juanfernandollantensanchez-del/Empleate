@@ -10,10 +10,8 @@ from .forms import RegistroUsuarioForm
 from .models import Usuario
 
 
-# PORTADA PÚBLICA ANTES DEL LOGIN (INSTRUCCIONES, INTEGRANTES Y CHATBOT IA)
+# PORTADA PÚBLICA (INSTRUCCIONES, INTEGRANTES Y CHATBOT IA)
 def portada(request):
-    if request.user.is_authenticated:
-        return redirect('inicio')
     return render(request, 'portada.html')
 
 
@@ -33,8 +31,8 @@ def chatbot_asistente(request):
             )
         elif any(p in mensaje for p in ['registrar', 'registro', 'cuenta', 'iniciar', 'login', 'entrar']):
             respuesta = (
-                "Para ingresar, haz clic en **'Iniciar Sesión'** o **'Registrarse'** en la barra superior. "
-                "Selecciona tu rol (**Candidato** o **Empresa**) al crear tu cuenta y accede a tu panel."
+                "Para ingresar, haz clic en **'Ir a la Plataforma'** en la parte superior. "
+                "Desde allí podrás iniciar sesión o crear tu cuenta seleccionando tu rol (**Candidato** o **Empresa**)."
             )
         elif any(p in mensaje for p in ['vacante', 'oferta', 'empleo', 'trabajo', 'postular']):
             respuesta = (
@@ -108,7 +106,6 @@ def inicio(request):
     contexto = {'usuario': request.user}
 
     if request.user.is_authenticated:
-        # Si inició sesión, muestra tablas según su rol
         if request.user.rol == 'admin':
             contexto['todos_usuarios'] = Usuario.objects.all()
         elif request.user.rol == 'empresa':
@@ -116,7 +113,6 @@ def inicio(request):
         elif request.user.rol == 'candidato':
             contexto['empresas'] = Usuario.objects.filter(rol='empresa', estado=True)
     else:
-        # Si entra sin iniciar sesión, muestra la información pública para registrarse o explorar
         contexto['candidatos'] = Usuario.objects.filter(rol='candidato', estado=True)
         contexto['empresas'] = Usuario.objects.filter(rol='empresa', estado=True)
 
