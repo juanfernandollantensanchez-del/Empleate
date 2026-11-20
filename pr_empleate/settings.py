@@ -1,7 +1,3 @@
-"""
-Django settings for pr_empleate project.
-"""
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -13,7 +9,7 @@ SECRET_KEY = 'django-insecure-r-sr@gc&4)+^te2(&6is14k#&%dvv7=6=)2h-u=&_b(%9w2=i$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -45,6 +41,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Middleware de WhiteNoise para producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,7 +102,7 @@ TIME_ZONE = 'America/Bogota'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static files (Configuración completa con WhiteNoise)
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
@@ -114,7 +111,10 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Email (Configuración estándar corregida)
+# Almacenamiento optimizado de archivos estáticos para producción
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Email (Configuración estándar)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Media Files & Custom User Model
