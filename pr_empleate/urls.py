@@ -10,6 +10,7 @@ admin.site.index_title = "Panel de Control General (Base de Datos)"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 
     path('', include('app_usuario.urls')),
     path('vacantes/', include('app_empleate.urls')),

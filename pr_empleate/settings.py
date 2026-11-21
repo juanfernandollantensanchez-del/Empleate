@@ -21,10 +21,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'django.contrib.sites',
+
     # Librerías de terceros
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 
     # Tus demás aplicaciones
     'app_feedback',
@@ -34,6 +40,8 @@ INSTALLED_APPS = [
     'categorias_app',
     'app_empleate',
 ]
+
+SITE_ID = 1
 
 # Configuración de Crispy Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -48,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'pr_empleate.urls'
@@ -96,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # Internationalization
 LANGUAGE_CODE = 'es-co'
 TIME_ZONE = 'America/Bogota'
@@ -125,4 +139,35 @@ AUTH_USER_MODEL = 'app_usuario.Usuario'
 
 # Redirecciones del sistema de autenticación
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'inicio'
+LOGOUT_REDIRECT_URL = 'portada'
+
+# Configuración de django-allauth para Google y Facebook
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile'],
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+        ],
+        'VERSION': 'v19.0',
+    }
+}

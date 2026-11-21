@@ -5,23 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Empleate{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=5">
 </head>
 <body class="usuario-base-page">
 
     <nav class="navbar">
-        <a href="#" class="logo">Empleate</a>
+        <a href="/" class="logo">Empleate</a>
         <div class="nav-links">
+            <a href="/vacantes/">📋 Vacantes</a>
+
             {% if user.is_authenticated %}
-                <span class="usuario-saludo">Hola, {{ user.username }}</span>
+                {% if user.rol == 'empresa' or user.rol == 'admin' %}
+                    <a href="{% url 'crear_vacante' %}" style="background-color: #FFFFFF; color: #0284C7; font-weight: 700;">
+                        ➕ Publicar Vacante
+                    </a>
+                {% endif %}
+
+                <span class="usuario-saludo">Hola, {{ user.username }} ({{ user.rol|title }})</span>
+
                 {% if user.rol == 'admin' %}
                     <a href="{% url 'gestion_usuarios' %}">Gestionar Usuarios</a>
                 {% endif %}
+
                 <a href="{% url 'cambiar_password' %}">Cambiar Contraseña</a>
                 <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
                 <a href="{% url 'login' %}">Iniciar Sesión</a>
                 <a href="{% url 'registro_usuario' %}">Registrarse</a>
+                <a href="{% url 'login' %}?rol=empresa" style="background-color: #FFFFFF; color: #0284C7; font-weight: 700;">
+                    🏢 Acceso Empresas
+                </a>
             {% endif %}
         </div>
     </nav>

@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import RegistroUsuarioForm
 from .models import Usuario
+from app_empleate.models import OfertaVacante
 
 
 # PORTADA PÚBLICA (INSTRUCCIONES, INTEGRANTES Y CHATBOT IA)
@@ -99,9 +100,58 @@ def iniciar_sesion(request):
     return render(request, 'usuarios/login.html', {'form': form})
 
 
+def acceso_rapido(request):
+    if request.method == 'POST':
+        metodo = request.POST.get('metodo', 'telefono')
+        dato = request.POST.get('dato_contacto', '').strip()
+        rol = request.POST.get('rol', 'candidato')
+
+        if not dato:
+            messages.error(request, 'Por favor ingresa tu correo o número de teléfono.')
+            return redirect('login')
+
+        if metodo == 'telefono':
+            usuario = Usuario.objects.filter(telefono=dato).first()
+            if not usuario:
+                username_base = f"tel_{dato}"
+                usuario, _ = Usuario.objects.get_or_create(
+                    username=username_base,
+                    defaults={
+                        'first_name': 'Usuario',
+                        'last_name': dato,
+                        'telefono': dato,
+                        'rol': rol,
+                        'estado': True,
+                    }
+                )
+        else:
+            usuario = Usuario.objects.filter(email=dato).first()
+            if not usuario:
+                nombre_base = dato.split('@')[0]
+                usuario, _ = Usuario.objects.get_or_create(
+                    username=nombre_base,
+                    defaults={
+                        'first_name': nombre_base.capitalize(),
+                        'last_name': f'({metodo.capitalize()})',
+                        'email': dato,
+                        'rol': rol,
+                        'estado': True,
+                    }
+                )
+
+        login(request, usuario)
+        messages.success(request, f'¡Bienvenido {usuario.first_name}! Ingresaste con {metodo.capitalize()}.')
+        return redirect('inicio')
+
+    return redirect('login')
+
+
 # VISTA PRINCIPAL (ACCESIBLE CON O SIN SESIÓN INICIADA)
 def inicio(request):
-    contexto = {'usuario': request.user}
+    contexto = {
+        'usuario': request.user,
+        'vacantes': OfertaVacante.objects.all().order_by('-id'),
+    }
 
     if request.user.is_authenticated:
         if request.user.rol == 'admin':
