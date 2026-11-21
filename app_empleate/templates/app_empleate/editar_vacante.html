@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar vacante - EMPLEATE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="empleate-editar-page">
+
+    <div class="container py-5 app-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <!-- Encabezado -->
+                <div class="header-section vacantes-header p-4 mb-4 text-center">
+                    <h1 class="fw-bold m-0">✏️ Editar vacante</h1>
+                    <p class="mb-0 mt-2">Modifica la información necesaria de la oferta laboral</p>
+                </div>
+
+                <!-- Formulario -->
+                <div class="card card-custom form-container p-4 p-md-5">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Cargo:</label>
+                            <input 
+                                type="text" 
+                                name="cargo" 
+                                class="form-control" 
+                                value="{{ vacante.cargo }}" 
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Categoría:</label>
+                            <input 
+                                type="text" 
+                                name="categoria" 
+                                class="form-control" 
+                                value="{{ vacante.categoria }}" 
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Descripción:</label>
+                            <textarea 
+                                name="descripcion" 
+                                class="form-control" 
+                                rows="4"
+                            >{{ vacante.descripcion }}</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Salario:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input 
+                                        type="number" 
+                                        name="salario" 
+                                        step="0.01" 
+                                        class="form-control" 
+                                        value="{{ vacante.salario }}" 
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Empresa:</label>
+                                <input 
+                                    type="text" 
+                                    name="empresa" 
+                                    class="form-control" 
+                                    value="{{ vacante.empresa }}" 
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary py-2.5 rounded-pill fw-bold fs-6">
+                                Guardar cambios
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Botón Cancelar -->
+                <div class="mt-4 text-center">
+                    <a href="{% url 'inicio' %}" class="btn btn-outline px-4 py-2 rounded-pill">
+                        Cancelar
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

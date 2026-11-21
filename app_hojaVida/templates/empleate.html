@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPLEATE</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="empleate-hojavida-home">
+
+    <div class="page-wrapper app-container">
+        <header class="header-section vacantes-header">
+            <h1>EMPLEATE</h1>
+            <h2>Encuentra tu empleo ideal</h2>
+        </header>
+
+        <section class="form-container filtros-vacantes">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="input-field" placeholder="Cargo o profesión">
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar ofertas</button>
+            </form>
+        </section>
+
+        <section class="section-block hojavida-seccion">
+            <h3>Últimas ofertas</h3>
+            <div class="card">
+                <p>Programador Junior</p>
+            </div>
+            <div class="card">
+                <p>Asistente Administrativo</p>
+            </div>
+            <div class="card">
+                <p>Diseñador Gráfico</p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

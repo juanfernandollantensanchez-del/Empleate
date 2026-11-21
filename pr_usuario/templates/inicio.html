@@ -1,13 +1,50 @@
 {% extends 'usuarios/base.html' %}
 
-{% block title %}Inicio - Empléate{% endblock %}
+{% block title %}Inicio - Empleate{% endblock %}
 
 {% block content %}
 <div class="card">
-    <h2>Panel Principal</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <h2 style="margin: 0;">Panel Principal</h2>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            {% if user.is_authenticated and user.rol == 'empresa' or user.is_authenticated and user.rol == 'admin' %}
+                <a href="{% url 'crear_vacante' %}" class="btn btn-primary">➕ Publicar Nueva Vacante</a>
+            {% endif %}
+            <a href="/vacantes/" class="btn btn-outline">📋 Ir a Vacantes</a>
+        </div>
+    </div>
 
     {% if user.is_authenticated %}
         <p>Bienvenido, <strong>{{ usuario.first_name }} {{ usuario.last_name }}</strong> (Rol: <span style="text-transform: capitalize;">{{ usuario.rol }}</span>)</p>
+
+        <hr>
+        <h3>Vacantes Publicadas Recientemente</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cargo</th>
+                    <th>Empresa</th>
+                    <th>Categoría</th>
+                    <th>Salario</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vac in vacantes %}
+                <tr>
+                    <td><strong>{{ vac.cargo }}</strong></td>
+                    <td>{{ vac.empresa }}</td>
+                    <td><span class="badge">{{ vac.categoria }}</span></td>
+                    <td>${{ vac.salario }}</td>
+                    <td>{{ vac.fecha_publicacion }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">Aún no hay vacantes publicadas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
 
         {% if usuario.rol == 'candidato' %}
             <h3>Empresas Registradas</h3>
@@ -86,7 +123,33 @@
         {% endif %}
 
     {% else %}
-        <p>Bienvenido a Empléate.</p>
+        <p>Bienvenido a Empleate. Inicia sesión como <strong>Candidato</strong> para postularte o como <strong>Empresa</strong> para publicar vacantes.</p>
+
+        <hr>
+        <h3>Vacantes Publicadas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cargo</th>
+                    <th>Empresa</th>
+                    <th>Categoría</th>
+                    <th>Salario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vac in vacantes %}
+                <tr>
+                    <td><strong>{{ vac.cargo }}</strong></td>
+                    <td>{{ vac.empresa }}</td>
+                    <td><span class="badge">{{ vac.categoria }}</span></td>
+                    <td>${{ vac.salario }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Aún no hay vacantes publicadas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
 
         <h3>Candidatos Registrados</h3>
         <table>

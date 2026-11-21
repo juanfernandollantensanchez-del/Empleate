@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'app_postulacion/base.html' %}
 
 {% block content %}
 <h1>📊 Reporte de Postulados por Oferta</h1>
@@ -7,9 +7,9 @@
 
 {% if reporte %}
     <!-- Tarjetas de resumen -->
-    <div class="row mb-4">
+    <div class="row mb-4 grid-cards">
         <div class="col-md-4">
-            <div class="card bg-primary text-white">
+            <div class="card card-resumen-cielo">
                 <div class="card-body">
                     <h5>Total de Ofertas</h5>
                     <h2>{{ reporte|length }}</h2>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-success text-white">
+            <div class="card card-resumen-pastel">
                 <div class="card-body">
                     <h5>Total de Postulaciones</h5>
                     <h2>
@@ -32,9 +32,9 @@
     </div>
 
     <!-- Tabla de reporte -->
-    <div class="table-responsive">
+    <div class="table-responsive table-wrapper">
         <table class="table table-striped">
-            <thead class="table-dark">
+            <thead>
                 <tr>
                     <th>#</th>
                     <th>Oferta</th>
@@ -50,14 +50,14 @@
                         <td><strong>{{ item.oferta.titulo }}</strong></td>
                         <td>{{ item.oferta.empresa }}</td>
                         <td>
-                            <span class="badge bg-primary">
+                            <span class="badge badge-destacado">
                                 {{ item.total_postulados }}
                             </span>
                         </td>
                         <td>
                             <!-- Barra de progreso -->
                             <div class="progress">
-                                <div class="progress-bar bg-success" 
+                                <div class="progress-bar" 
                                      style="width: {{ item.total_postulados }}%">
                                     {{ item.total_postulados }}%
                                 </div>
@@ -70,12 +70,14 @@
     </div>
     
 {% else %}
-    <div class="alert alert-warning">
+    <div class="alert alert-info">
         ⚠️ No hay ofertas registradas en el sistema.
     </div>
 {% endif %}
 
-<a href="{% url 'listar_ofertas' %}" class="btn btn-secondary">
-    ⬅️ Volver a ofertas
-</a>
+<div class="mt-4">
+    <a href="{% url 'listar_ofertas' %}" class="btn btn-outline">
+        ⬅️ Volver a ofertas
+    </a>
+</div>
 {% endblock %}

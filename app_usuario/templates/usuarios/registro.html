@@ -1,17 +1,46 @@
 {% extends 'usuarios/base.html' %}
 
-{% block title %}Registro - Empléate{% endblock %}
+{% block title %}Registro - Empleate{% endblock %}
 
 {% block content %}
-<div class="card">
-    <h2>Registro de Nuevo Usuario</h2>
+<div class="card auth-card">
+    {% if request.GET.rol == 'empresa' %}
+        <h2>🏢 Registro de Nueva Empresa</h2>
+        <p class="subtitulo-seccion" style="text-align: center;">
+            Crea la cuenta de tu empresa para publicar ofertas laborales en <strong>Empleate</strong>.
+        </p>
+    {% else %}
+        <h2>👤 Registro de Nuevo Usuario</h2>
+        <p class="subtitulo-seccion" style="text-align: center;">
+            Selecciona tu rol (<strong>Candidato</strong> o <strong>Empresa</strong>) y completa tus datos.
+        </p>
+    {% endif %}
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn">Completar Registro</button>
+        <button type="submit" class="btn">
+            {% if request.GET.rol == 'empresa' %}Registrar Empresa{% else %}Completar Registro{% endif %}
+        </button>
     </form>
-    <p style="text-align: center; margin-top: 15px;">
-        ¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: var(--azul-oscuro);">Inicia sesión aquí</a>
+
+    <p class="auth-footer-link">
+        {% if request.GET.rol == 'empresa' %}
+            ¿Ya tienes cuenta empresarial? <a href="{% url 'login' %}?rol=empresa">Inicia sesión aquí</a>
+        {% else %}
+            ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>
+        {% endif %}
     </p>
 </div>
-{% endblock %}
+
+{% if request.GET.rol == 'empresa' %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectRol = document.querySelector('select[name="rol"]');
+        if (selectRol) {
+            selectRol.value = "empresa";
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}  

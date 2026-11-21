@@ -1,0 +1,35 @@
+{% extends 'app_postulacion/base.html' %}
+
+{% block content %}
+<h2>Ofertas de Empleo Disponibles</h2>
+<p class="subtitulo-seccion">Haz clic en <strong>Postularme</strong> para registrar tu solicitud en la oferta de tu interés.</p>
+
+{% if ofertas %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título del Cargo</th>
+                    <th>Descripción de la Oferta</th>
+                    <th>Fecha Publicación</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for oferta in ofertas %}
+                <tr>
+                    <td><strong>{{ oferta.titulo }}</strong></td>
+                    <td>{{ oferta.descripcion }}</td>
+                    <td>{{ oferta.fecha_publicacion|date:"d/m/Y H:i" }}</td>
+                    <td class="celda-centro">
+                        <a href="{% url 'postular_oferta' oferta.id %}" class="btn">Postularme</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="mensaje-vacio">No hay ofertas disponibles en este momento.</p>
+{% endif %}
+{% endblock %}

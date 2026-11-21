@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'app_postulacion/base.html' %}
 
 {% block content %}
 <h1>📋 Ofertas de Empleo Disponibles</h1>
 <hr>
 
 {% if ofertas %}
-    <div class="row">
+    <div class="row grid-cards">
         {% for oferta in ofertas %}
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100">
